@@ -1,0 +1,17 @@
+ <script>
+
+    document.getElementById("btn").addEventListener("click",doStuff);
+    function doStuff(){
+        let userInfo = {};
+        
+        userInfo.firstName = document.getElementById("nm").value;
+        userInfo.lastName = document.getElementById("ls").value;
+        userInfo.sheet = document.getElementById("sheet").value;
+
+        google.script.run.userClicking(userInfo);
+        document.getElementById("nm").value = "";
+        document.getElementById("ls").value = "";
+        document.getElementById("sheet").value = "";
+
+      }
+</script>
