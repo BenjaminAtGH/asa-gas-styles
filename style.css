@@ -36,6 +36,7 @@ width: 100%;
 max-width: 300px;
 box-shadow: 0 4px 10px rgba(3, 62, 22, 0.2);
 margin: 5%;
+box-sizing: border-box;
 }
 /* form header */
 .form-header {
@@ -44,25 +45,23 @@ margin-bottom: 10px;
 /* Form div */
 .form-div {
 width: 100%;
-margin-bottom: 10px;
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: flex-start;
 background-color: rgb(35, 201, 57);
 border-radius: 12px;
 padding: 10px;
+box-sizing: border-box;
 }
 
-select {
+select, input {
 width: 100%;
 padding: 10px;
 border-radius: 8px;
-}
-
-input {
-width: 100%;
-padding: 10px;
-border-radius: 8px;
+border: 1px solid #ccc; /* Add consistent border */
+font-size: 16px; /* Consistent font size */
+box-sizing: border-box; /* Ensure padding doesn't increase width */
+margin-bottom: 10px; /* Consistent spacing between form elements */
 }
 
 button {
