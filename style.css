@@ -124,6 +124,7 @@ th {
 td {
     padding-top: 8px;
     text-align: center;
+    border: #03b20f;
     border-bottom: 1px solid #ddd;
 }
 
