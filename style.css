@@ -1,3 +1,5 @@
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #B0E0D3;
@@ -115,8 +117,12 @@ padding: 8px;
 border-radius: 10px;
 }
 
+th {
+    padding-bottom: 12px;
+}
+
 td {
-    padding: 8px;
+    padding-top: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
