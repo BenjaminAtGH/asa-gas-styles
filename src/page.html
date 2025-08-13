@@ -2,53 +2,161 @@
 <html>
   <head>
     <base target="_top">
-    <link rel="stylesheet" href="https://BenjaminAtGH.github.io/asa-gas-styles/style.css"/>
-
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+      
+  /* All styles moved to style.css */
+    </style>
   </head>
   <body>
     <div class="box">
-      <div >
-        <h1> hello </h1>
-      </div>
-      <br>
-      <div class="form-row">
-        <label for="sheet">Sheet</label>
-        <select id="sheet" name="sheet">
-          <option value="immuno">Immunosero</option>
-          <option value="hema">Hematologi</option>
-          <option value="bap">BAP</option>
-          <option value="lain">Lain</option>
-        </select>
-        </div>
-        <div class="form-row">
-          <label>Nama</label>
-          <input type="text" id="nm">
-        </div>
-        <div class="form-row">
-          <label>Jumlah</label>
-          <input type="number" id="ls">
-        </div>
       <div>
-        <button id="btn">Submit</button>
+        <h1 class="header-font">Inventory Submission</h1>
       </div>
+      <div class="form-div">
+        <br/>
+        <form id="myForm">
+          <label class="label-font" for="Kategori">Kategori</label>
+          <select name="Kategori" id="Kategori"></select>
+          <br/>
+          <label class="label-font" for="items">Reagen/Item</label>
+          <select name="items" id="items"></select>
+          <br/>
+          <label class="label-font" for="jumlah">Jumlah</label>
+          <input name="jumlah" id="jumlah" type="number" min="0"></input>
+          <br/>
+          <label class="label-font" for="Unit">Unit</label>
+          <select name="Unit" id="Unit">
+            <option value="Pcs">Pcs</option>
+            <option value="%">%</option>
+            <option value="box">box</option>
+            <option value="ml">ml</option>
+          </select>
+          <div class="button-group">
+            <button type="button" onclick="addToPreview()">Add to Preview</button>
+            <button type="button" onclick="submitAll()">Submit All</button>
+          </div>
+        </form>
+        <p id="message"></p>
+      </div>
+
+      <div class="table-div">
+        <h2 class="label-font">Preview Table</h2>
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th class="th-font leftmost-table" id="Kategori-tab">Kategori</th>
+              <th class="th-font centerleft-table" id="Reagen-tab">Reagen/Item</th>
+              <th class="th-font centerright-table" id="Jumlah-tab">Jumlah</th>
+              <th class="th-font rightmost-table" id="Unit-tab">Unit</th>
+            </tr>
+          </thead>
+          <tbody id="data-body">
+            <!-- Data will be populated here -->
+          </tbody>
+        </table>
+      </div>
+      <script>
+        let cachedData = {};
+        let previewData = [];
+
+        function loadData() {
+          google.script.run.withSuccessHandler(function(data) {
+            cachedData = data;
+            const categoryDropdown = document.getElementById("Kategori");
+            categoryDropdown.innerHTML = "";
+
+            Object.keys(cachedData).forEach(category => {
+              const option = document.createElement("option");
+              option.value = category;
+              option.textContent = category;
+              categoryDropdown.appendChild(option);
+            });
+
+            categoryDropdown.addEventListener("change", populateItems);
+            populateItems();
+          }).getCachedData();
+        }
+
+        function populateItems() {
+          const category = document.getElementById("Kategori").value;
+          const items = cachedData[category] || [];
+
+          const itemDropdown = document.getElementById("items");
+          itemDropdown.innerHTML = "";
+
+          items.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item;
+            option.textContent = item;
+            itemDropdown.appendChild(option);
+          });
+        }
+
+        function addToPreview() {
+          const categoryInput = document.getElementById("Kategori");
+          const reagentInput = document.getElementById("items");
+          const quantityInput = document.getElementById("Unit");
+          const jumlahInput = document.getElementById("jumlah");
+
+          if (!categoryInput.value || !reagentInput.value || !quantityInput.value || !jumlahInput.value) {
+            document.getElementById("message").textContent = "Error: Please fill in all required fields.";
+            return;
+          }
+
+          const formData = {
+            category: categoryInput.value.trim(),
+            reagent: reagentInput.value.trim(),
+            quantity: quantityInput.value.trim(),
+            jumlah: jumlahInput.value.trim()
+          };
+
+          previewData.push(formData);
+          updatePreviewTable();
+          document.getElementById("message").textContent = "Data added to preview!";
+          document.getElementById("myForm").reset();
+          populateItems();
+        }
+
+        function updatePreviewTable() {
+          const tbody = document.getElementById("data-body");
+          tbody.innerHTML = "";
+
+          previewData.forEach(data => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${data.category}</td>
+              <td>${data.reagent}</td>
+              <td>${data.jumlah}</td>
+              <td>${data.quantity}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        }
+
+        function submitAll() {
+          if (previewData.length === 0) {
+            document.getElementById("message").textContent = "Error: No data in preview to submit.";
+            return;
+          }
+
+          google.script.run
+            .withSuccessHandler(function(response) {
+              document.getElementById("message").textContent = response;
+              previewData = [];
+              updatePreviewTable();
+              document.getElementById("myForm").reset();
+              populateItems();
+            })
+            .withFailureHandler(function(error) {
+              document.getElementById("message").textContent = "Error: " + (error.message || error);
+            })
+            .submitAllData(previewData);
+        }
+
+        // Initial load
+        loadData();
+      </script>
     </div>
-    <script>
-
-    document.getElementById("btn").addEventListener("click",doStuff);
-    function doStuff(){
-        var userInfo = {};
-        
-        userInfo.firstName = document.getElementById("nm").value;
-        userInfo.lastName = document.getElementById("ls").value;
-        userInfo.sheet = document.getElementById("sheet").value;
-
-        google.script.run.userClicking(userInfo);
-        document.getElementById("nm").value = "";
-        document.getElementById("ls").value = "";
-        document.getElementById("sheet").value = "";
-
-      }
-    </script>
-    
   </body>
 </html>

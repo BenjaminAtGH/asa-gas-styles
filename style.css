@@ -115,6 +115,11 @@ padding: 8px;
 border-radius: 10px;
 }
 
+td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
 
 .button-group { 
     margin-top: 10px; 
