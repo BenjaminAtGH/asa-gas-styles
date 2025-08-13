@@ -10,17 +10,23 @@ margin: 0;
 
 /* Header font styling */
 .header-font {
-    font-size: 30px;
-    font-weight: bold;
-    color: #03b20f;
-    align-self: flex-start;
+font-size: 30px;
+font-weight: bold;
+color: #03b20f;
+align-self: flex-start;
 }
 /* Label font styling */
 .label-font {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #ffffff;
-    align-self: flex-start;
+font-weight: bold;
+margin-bottom: 5px;
+color: #ffffff;
+align-self: flex-start;
+}
+
+.th-font {
+font-weight: bold;
+color: #03b20f;
+align-self: flex-start;
 }
 
 /* Box styling */
@@ -29,14 +35,13 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-background: #ffffff;
+background: #fff;
 padding: 20px;
 border-radius: 12px;
 width: 100%;
 max-width: 300px;
-box-shadow: 0 4px 10px rgba(3, 62, 22, 0.2);
+box-shadow: 0 4px 10px rgba(3,62,22,0.2);
 margin: 5%;
-box-sizing: border-box;
 }
 /* form header */
 .form-header {
@@ -45,38 +50,78 @@ margin-bottom: 10px;
 /* Form div */
 .form-div {
 width: 100%;
+margin-bottom: 10px;
 display: flex;
 flex-direction: column;
-align-items: flex-start;
-background-color: rgb(35, 201, 57);
+align-items: center;
+background: rgb(35,201,57);
 border-radius: 12px;
 padding: 10px;
-box-sizing: border-box;
+overflow-x: auto;
 }
 
 select, input {
 width: 100%;
 padding: 10px;
 border-radius: 8px;
-border: 1px solid #ccc; /* Add consistent border */
-font-size: 16px; /* Consistent font size */
-box-sizing: border-box; /* Ensure padding doesn't increase width */
-margin-bottom: 10px; /* Consistent spacing between form elements */
+border: 1px solid #ccc;
+font-size: 16px;
+box-sizing: border-box;
+margin-bottom: 10px;
 }
+
+.table-div {
+width: 100%;
+padding: 10px;
+margin-bottom: 20px;
+max-width: 100%;
+display: flex;
+flex-direction: column;
+background: rgb(35,201,57);
+border-radius: 12px;
+overflow-x: auto;
+border: none;
+
+
+}
+
+.leftmost-table {
+text-align: left;
+border-top-left-radius: 12px;
+}
+
+.rightmost-table {
+text-align: left;
+border-top-right-radius: 12px;
+}
+
+#data-table th {
+border: none;
+padding: 10px;
+text-align: center;
+background: #fff;
+}
+#data-table td {
+border: 1px solid #ccc;
+padding: 10px;
+text-align: center;
+background: #fff;
+}
+
 
 button {
 margin-top: 10px;
 padding: 10px 20px;
 font-size: 16px;
-background-color: #dbe9df;
+background: #dbe9df;
 border: none;
 border-radius: 8px;
 cursor: pointer;
 max-width: 200px;
-transition: background-color 0.3s ease;
+transition: background 0.3s ease;
 }
 button:hover {
-background-color: #a6e7a6;
+background: #a6e7a6;
 }
 
 
