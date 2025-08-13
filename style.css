@@ -1,12 +1,15 @@
 body {
-font-family: Arial, sans-serif;
-background-color: #B0E0D3;
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #B0E0D3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    min-width: 320px;
+    min-height: 480px;
 }
+
 
 /* Header font styling */
 .header-font {
@@ -27,6 +30,7 @@ align-self: flex-start;
 font-weight: bold;
 color: #03b20f;
 align-self: flex-start;
+padding-inline: 5px;
 }
 
 /* Box styling */
@@ -49,7 +53,7 @@ margin-bottom: 10px;
 }
 /* Form div */
 .form-div {
-width: 100%;
+width: 90%;
 margin-bottom: 10px;
 display: flex;
 flex-direction: column;
@@ -71,57 +75,100 @@ margin-bottom: 10px;
 }
 
 .table-div {
-width: 100%;
-padding: 10px;
-margin-bottom: 20px;
-max-width: 100%;
-display: flex;
-flex-direction: column;
-background: rgb(35,201,57);
-border-radius: 12px;
-overflow-x: auto;
-border: none;
-
-
+    width: 90%;
+    padding: 10px;
+    margin: 16px 16px 20px 16px;
+    max-width: calc(100vw - 32px);
+    display: flex;
+    flex-direction: column;
+    background: rgb(68, 202, 85);
+    border-radius: 12px;
+    overflow-x: auto;
+    border: none;
 }
 
 .leftmost-table {
-text-align: left;
+text-align: center;
 border-top-left-radius: 12px;
+;
+}
+.centerleft-table {
+text-align: center;
+border-left: 2px solid #03b20f;
+}
+
+.centerright-table {
+text-align: center;
+border-left: 2px solid #03b20f;
 }
 
 .rightmost-table {
-text-align: left;
+text-align: center;
 border-top-right-radius: 12px;
+border-left: 2px solid #03b20f;
 }
 
-#data-table th {
+#data-table {
 border: none;
-padding: 10px;
-text-align: center;
-background: #fff;
-}
-#data-table td {
-border: 1px solid #ccc;
-padding: 10px;
-text-align: center;
-background: #fff;
+background-color: #ffffff;
+padding: 8px;
+border-radius: 10px;
 }
 
+
+.button-group { 
+    margin-top: 10px; 
+    flex-direction: row;
+}
+
+/* Button container for horizontal layout */
+.button-row {
+    display: flex;
+    flex-direction: row !important;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+@media (max-width: 480px) {
+    body {
+        min-width: 320px;
+        min-height: 480px;
+        font-size: 15px;
+    }
+    .box {
+        max-width: 300px;
+        margin: 5% auto;
+        padding: 10px;
+    }
+    .table-div {
+        margin: 16px 16px 20px 16px;
+        max-width: calc(100vw - 32px);
+    }
+    .button-row {
+        gap: 5px;
+    }
+    button {
+        font-size: 14px;
+        padding: 8px 12px;
+        min-width: 80px;
+    }
+}
 
 button {
-margin-top: 10px;
-padding: 10px 20px;
-font-size: 16px;
-background: #dbe9df;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-max-width: 200px;
-transition: background 0.3s ease;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #dbe9df;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: auto;
+    max-width: 200px;
+    transition: background 0.3s ease;
 }
 button:hover {
-background: #a6e7a6;
+    background: #a6e7a6;
 }
+
 
 
